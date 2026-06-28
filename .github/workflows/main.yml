@@ -1,7 +1,12 @@
 name: Build Electron App for Windows
 
+name: Build Electron App for Windows
+
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
