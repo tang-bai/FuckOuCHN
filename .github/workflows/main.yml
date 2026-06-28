@@ -17,19 +17,27 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "22"
 
       - name: Install Yarn
         run: npm install -g yarn
 
+      - name: Show versions
+        run: |
+          node -v
+          npm -v
+          yarn -v
+
       - name: Install dependencies
         run: yarn install
 
-      - name: Build Electron
+      - name: Build Electron App
         run: yarn build:electron
 
       - name: Upload EXE
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: 国开精灵
-          path: dist/ImsTechAuto.exe
+          path: |
+            dist/ImsTechAuto.exe
