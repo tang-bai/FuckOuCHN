@@ -12,25 +12,23 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: yarn
 
       - name: Install dependencies
-        run: |
-          yarn install
+        run: yarn install
 
       - name: Build and package Electron app
-        run: |
-          yarn build:electron
+        run: yarn build:electron
 
       - name: Upload Artifacts
-        if: success()
         uses: actions/upload-artifact@v4
+        if: success()
         with:
-          name:国开精灵.exe
-          path: |
-            dist/ImsTechAuto.exe
+          name: 国开精灵
+          path: dist/ImsTechAuto.exe
