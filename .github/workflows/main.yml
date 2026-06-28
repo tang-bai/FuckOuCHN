@@ -11,24 +11,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Check out repository
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+
+      - name: Install Yarn
+        run: npm install -g yarn
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Build and package Electron app
+      - name: Build Electron
         run: yarn build:electron
 
-      - name: Upload Artifacts
+      - name: Upload EXE
         uses: actions/upload-artifact@v4
-        if: success()
         with:
           name: 国开精灵
           path: dist/ImsTechAuto.exe
